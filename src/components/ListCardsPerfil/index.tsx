@@ -1,21 +1,19 @@
-import CardHome from '../../components/CardHome'
-import Card from '../../modals/cardHome'
+import Card from '../../modals/cardPerfil'
+import CardPerfil from '../CardPerfil'
 import { ListContainer } from './styles'
 
 type Props = {
   lista: Card[]
 }
 
-export const ListCardsHome = ({ lista }: Props) => (
+export const ListCardsPerfil = ({ lista }: Props) => (
   <div className="container">
     <ListContainer>
       {lista.map((card) => (
-        <CardHome
+        <CardPerfil
           imagem={card.imagem}
           nome={card.nome}
-          ava={card.ava}
           descricao={card.descricao}
-          infos={card.infos}
           id={card.id}
           key={card.id}
         />
@@ -24,4 +22,4 @@ export const ListCardsHome = ({ lista }: Props) => (
   </div>
 )
 
-export default ListCardsHome
+export default ListCardsPerfil

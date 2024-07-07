@@ -28,7 +28,7 @@ const CardHome = ({ imagem, nome, ava, descricao, infos }: Props) => (
         </div>
       </CardHeader>
       <Descricao>{descricao}</Descricao>
-      <Button>Saiba mais</Button>
+      <Button to="/restaurante">Saiba mais</Button>
     </div>
   </Card>
 )
