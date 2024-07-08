@@ -9,6 +9,13 @@ export const Card = styled.div`
   gap: 0;
   position: relative;
 
+  > img {
+    width: 100%;
+    display: block;
+    height: 217px;
+    object-fit: cover;
+  }
+
   .infos {
     position: absolute;
     top: 16px;

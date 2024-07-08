@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import logo from '../../assets/images/logo.png'
 import instagram from '../../assets/images/instagram.png'
 import facebook from '../../assets/images/facebook.png'
@@ -6,7 +7,9 @@ import { FooterContainer, Redes, Paragrafo } from './styles'
 
 const Footer = () => (
   <FooterContainer>
-    <img src={logo} alt="eFood" />
+    <Link to="/">
+      <img src={logo} alt="efood" />
+    </Link>
     <Redes>
       <li>
         <img src={instagram} alt="instagram" />

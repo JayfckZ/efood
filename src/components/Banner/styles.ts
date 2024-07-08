@@ -6,6 +6,22 @@ export const BannerContainer = styled.section`
   background-repeat: no-repeat;
   font-size: 32px;
   padding: 24px 0 32px;
+  position: relative;
+
+  &::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+    content: '';
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+  }
 `
 export const Categoria = styled.h2`
   font-weight: 100;

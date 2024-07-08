@@ -1,27 +1,31 @@
 import CardHome from '../../components/CardHome'
-import Card from '../../modals/cardHome'
+import { Restaurante } from '../../models/restaurante'
 import { ListContainer } from './styles'
 
 type Props = {
-  lista: Card[]
+  restaurantes: Restaurante[]
 }
 
-export const ListCardsHome = ({ lista }: Props) => (
-  <div className="container">
-    <ListContainer>
-      {lista.map((card) => (
-        <CardHome
-          imagem={card.imagem}
-          nome={card.nome}
-          ava={card.ava}
-          descricao={card.descricao}
-          infos={card.infos}
-          id={card.id}
-          key={card.id}
-        />
-      ))}
-    </ListContainer>
-  </div>
-)
+export const ListCardsHome = ({ restaurantes }: Props) => {
+  return (
+    <div className="container">
+      <ListContainer>
+        {restaurantes.map((restaurante) => (
+          <li key={restaurante.id}>
+            <CardHome
+              capa={restaurante.capa}
+              titulo={restaurante.titulo}
+              avaliacao={restaurante.avaliacao}
+              descricao={restaurante.descricao}
+              tipo={restaurante.tipo}
+              destacado={restaurante.destacado}
+              id={restaurante.id}
+            />
+          </li>
+        ))}
+      </ListContainer>
+    </div>
+  )
+}
 
 export default ListCardsHome

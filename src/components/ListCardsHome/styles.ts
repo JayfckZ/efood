@@ -5,4 +5,5 @@ export const ListContainer = styled.div`
   grid-template-columns: 1fr 1fr;
   grid-gap: 80px 48px;
   padding: 80px 0 120px;
+  list-style: none;
 `
