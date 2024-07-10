@@ -29,6 +29,7 @@ export const HeaderContainer = styled.header`
 
       h2 {
         width: auto;
+        text-align: center !important;
       }
     }
   }

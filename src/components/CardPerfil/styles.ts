@@ -83,6 +83,7 @@ export const ModalContent = styled.div`
     display: block;
     width: 280px;
     height: 280px;
+    object-fit: cover;
   }
 
   .close {
@@ -113,5 +114,10 @@ export const ModalContent = styled.div`
 
   @media (width < ${breakpoints.tablet}) {
     flex-direction: column;
+
+    .foto-prato {
+      width: 100%;
+      height: 192px;
+    }
   }
 `

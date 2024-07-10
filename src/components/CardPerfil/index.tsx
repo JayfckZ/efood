@@ -76,8 +76,7 @@ const CardPerfil = ({ prato }: Props) => {
               }}
               variant="secondary"
             >
-              {'Clique para adicionar ao carrinho - ' +
-                formataPreco(prato.preco)}
+              {'Adicionar ao carrinho - ' + formataPreco(prato.preco)}
             </Button>
           </div>
         </ModalContent>
