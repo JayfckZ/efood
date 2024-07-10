@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { colors } from '../../styles'
+import { breakpoints, colors } from '../../styles'
 import { ButtonContainer } from '../Tag&Button/styles'
 
 export const CardContainer = styled.div`
@@ -109,5 +109,9 @@ export const ModalContent = styled.div`
     margin: 0;
     text-align: center;
     justify-self: end;
+  }
+
+  @media (width < ${breakpoints.tablet}) {
+    flex-direction: column;
   }
 `

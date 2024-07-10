@@ -12,14 +12,7 @@ export const ListCardsPerfil = ({ pratos }: Props) => (
       <ListContainer>
         {pratos.map((prato) => (
           <li key={prato.id}>
-            <CardPerfil
-              foto={prato.foto}
-              nome={prato.nome}
-              descricao={prato.descricao}
-              id={prato.id}
-              preco={prato.preco}
-              porcao={prato.porcao}
-            />
+            <CardPerfil prato={prato} />
           </li>
         ))}
       </ListContainer>

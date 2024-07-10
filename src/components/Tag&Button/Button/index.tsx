@@ -1,12 +1,13 @@
 import { ButtonContainer } from '../styles'
 
-type Props = {
+export type Props = {
+  variant?: 'primary' | 'secondary'
   children: string
   onClick?: () => void
   to?: string
 }
-const Button = ({ children, onClick, to }: Props) => (
-  <ButtonContainer onClick={onClick} to={to as string}>
+const Button = ({ variant = 'primary', children, onClick, to }: Props) => (
+  <ButtonContainer variant={variant} onClick={onClick} to={to as string}>
     {children}
   </ButtonContainer>
 )

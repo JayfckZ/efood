@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { colors } from '../../styles'
+import { ButtonContainer } from '../Tag&Button/styles'
 
 export const Card = styled.div`
   background-color: ${colors.branco};
