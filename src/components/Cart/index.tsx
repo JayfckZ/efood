@@ -14,7 +14,6 @@ import { useGetAdressQuery } from '../../services/cepApi'
 import { useGetCompraMutation } from '../../services/api'
 
 import * as S from './styles'
-import { colors } from '../../styles'
 
 const Card = () => {
   const dispatch = useDispatch()
