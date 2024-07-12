@@ -4,25 +4,33 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import InputMask from 'react-input-mask'
 
+import { Loading } from '../Loading'
 import Button from '../Tag&Button/Button'
 
 import { RootReducer } from '../../store'
-import { close, remove } from '../../store/reducers/cart'
+import { close, remove, reset } from '../../store/reducers/cart'
 import { formataPreco, getTotalPrice } from '../../utils'
 import { useGetAdressQuery } from '../../services/cepApi'
 import { useGetCompraMutation } from '../../services/api'
 
 import * as S from './styles'
+import { colors } from '../../styles'
 
 const Card = () => {
   const dispatch = useDispatch()
   const { items, isOpen } = useSelector((state: RootReducer) => state.cart)
   const [cep, setCep] = useState('')
-  const { data: dataCep, isLoading: carregandoCep } = useGetAdressQuery(cep, {
+  const { data: dataCep } = useGetAdressQuery(cep, {
     skip: !cep
   })
-  const [compra, { data: retornoCompra, isSuccess: compraSucedida }] =
-    useGetCompraMutation()
+  const [
+    compra,
+    {
+      isLoading: carregandoCompra,
+      data: retornoCompra,
+      isSuccess: compraSucedida
+    }
+  ] = useGetCompraMutation()
   const [estaNaEntrega, setEstaNaEntrega] = useState(false)
   const [estaNoPagamento, setEstaNoPagamento] = useState(false)
 
@@ -66,7 +74,33 @@ const Card = () => {
       )
     }),
     onSubmit: (values) => {
-      console.log('enviado', values)
+      compra({
+        products: items.map((item) => ({
+          id: item.id,
+          price: item.preco
+        })),
+        delivery: {
+          receiver: values.nome,
+          address: {
+            description: values.endereco,
+            city: values.cidade,
+            zipCode: values.cep,
+            number: Number(values.numero),
+            complement: values.complemento
+          }
+        },
+        payment: {
+          card: {
+            name: values.nomeCartao,
+            number: values.numeroCartao,
+            code: Number(values.cvv),
+            expires: {
+              month: Number(values.mes),
+              year: Number(values.ano)
+            }
+          }
+        }
+      })
     }
   })
 
@@ -83,16 +117,16 @@ const Card = () => {
   }
 
   useEffect(() => {
-    if (carregandoCep) {
-      form.values.endereco = 'Carregando endereço...'
-      form.values.cidade = 'Carregando endereço...'
+    if (dataCep && !dataCep.erro) {
+      const endereco = `${dataCep.logradouro}, ${dataCep.bairro}`
+      const cidade = dataCep.localidade
+
+      if (form.values.endereco !== endereco || form.values.cidade !== cidade) {
+        form.values.endereco = endereco
+        form.values.cidade = cidade
+      }
     }
-    if (dataCep) {
-      form.values.endereco = `${dataCep.logradouro}, ${dataCep.bairro}`
-      form.values.cidade = dataCep.localidade
-      form.values.cep = dataCep.cep
-    }
-  }, [dataCep, form.values, carregandoCep])
+  }, [dataCep, form])
 
   const backToCart = () => {
     setEstaNaEntrega(false)
@@ -130,34 +164,51 @@ const Card = () => {
     dispatch(remove(id))
   }
 
+  useEffect(() => {
+    if (compraSucedida) {
+      setEstaNoPagamento(false)
+      dispatch(reset())
+    }
+  }, [compraSucedida, dispatch])
+
   return (
     <S.CartContent className={isOpen ? 'is-open' : ''}>
       <S.Overlay onClick={closeCart} />
       <S.Sidebar>
         <S.Section
-          className={!estaNaEntrega && !estaNoPagamento ? 'is-visible' : ''}
+          className={
+            !estaNaEntrega && !estaNoPagamento && !compraSucedida
+              ? 'is-visible'
+              : ''
+          }
         >
-          {items.map((item) => (
-            <S.CartItem key={item.id}>
-              <img src={item.foto} />
-              <div>
-                <h4>{item.nome}</h4>
-                <p>{formataPreco(item.preco)}</p>
-              </div>
-              <button
-                onClick={() => removeItem(item.id)}
-                className="lixeira"
-                type="button"
-              />
-            </S.CartItem>
-          ))}
-          <S.Prices>
-            <p>Valor total</p>
-            <span>{formataPreco(getTotalPrice(items))}</span>
-          </S.Prices>
-          <Button onClick={goToEntrega} variant="secondary">
-            Continuar com a entrega
-          </Button>
+          {items.length > 0 ? (
+            <>
+              {items.map((item) => (
+                <S.CartItem key={item.id}>
+                  <img src={item.foto} />
+                  <div>
+                    <h4>{item.nome}</h4>
+                    <p>{formataPreco(item.preco)}</p>
+                  </div>
+                  <button
+                    onClick={() => removeItem(item.id)}
+                    className="lixeira"
+                    type="button"
+                  />
+                </S.CartItem>
+              ))}
+              <S.Prices>
+                <p>Valor total</p>
+                <span>{formataPreco(getTotalPrice(items))}</span>
+              </S.Prices>
+              <Button onClick={goToEntrega} variant="secondary">
+                Continuar com a entrega
+              </Button>
+            </>
+          ) : (
+            <span className="empty-span">Não há itens no carrinho.</span>
+          )}
           <Button onClick={closeCart} variant="secondary">
             Continuar buscando
           </Button>
@@ -282,7 +333,8 @@ const Card = () => {
             <div className="between">
               <S.FormItem id="numeroCartao">
                 <label htmlFor="numeroCartao">Número do cartão</label>
-                <input
+                <InputMask
+                  mask="9999 9999 9999 9999"
                   className={checkInputHasError('numeroCartao') ? 'error' : ''}
                   value={form.values.numeroCartao}
                   onChange={form.handleChange}
@@ -298,7 +350,8 @@ const Card = () => {
               </S.FormItem>
               <S.FormItem id="cvv">
                 <label htmlFor="cvv">CVV</label>
-                <input
+                <InputMask
+                  mask="999"
                   className={checkInputHasError('cvv') ? 'error' : ''}
                   value={form.values.cvv}
                   onChange={form.handleChange}
@@ -313,7 +366,8 @@ const Card = () => {
             <div className="between">
               <S.FormItem>
                 <label htmlFor="mes">Mês de vencimento</label>
-                <input
+                <InputMask
+                  mask="99"
                   className={checkInputHasError('mes') ? 'error' : ''}
                   value={form.values.mes}
                   onChange={form.handleChange}
@@ -326,7 +380,8 @@ const Card = () => {
               </S.FormItem>
               <S.FormItem>
                 <label htmlFor="ano">Ano de vencimento</label>
-                <input
+                <InputMask
+                  mask="99"
                   className={checkInputHasError('ano') ? 'error' : ''}
                   value={form.values.ano}
                   onChange={form.handleChange}
@@ -339,11 +394,51 @@ const Card = () => {
               </S.FormItem>
             </div>
           </S.Form>
-          <Button onClick={goToPagamento} variant="secondary">
-            Finalizar pagamento
+          <Button
+            type="submit"
+            onClick={() => {
+              if (!carregandoCompra) {
+                form.handleSubmit()
+              }
+            }}
+            variant="secondary"
+          >
+            {carregandoCompra ? <Loading size="16px" /> : 'Finalizar pedido'}
           </Button>
-          <Button onClick={goToEntrega} variant="secondary">
+          <Button
+            onClick={() => {
+              if (!carregandoCompra) {
+                goToEntrega()
+              }
+            }}
+            variant="secondary"
+          >
             Voltar a edição de endereço
+          </Button>
+        </S.Section>
+        <S.Section className={compraSucedida ? 'is-visible' : ''}>
+          <h3>
+            Pedido realizado - {retornoCompra ? retornoCompra.orderId : ''}
+          </h3>
+          <p className="margin">
+            Estamos felizes em informar que seu pedido já está em processo de
+            preparação e, em breve, será entregue no endereço fornecido.
+          </p>
+          <p className="margin">
+            Gostaríamos de ressaltar que nossos entregadores não estão
+            autorizados a realizar cobranças extras.
+          </p>
+          <p className="margin">
+            Lembre-se da importância de higienizar as mãos após o recebimento do
+            pedido, garantindo assim sua segurança e bem-estar durante a
+            refeição.
+          </p>
+          <p className="margin">
+            Esperamos que desfrute de uma deliciosa e agradável experiência
+            gastronômica. Bom apetite!
+          </p>
+          <Button onClick={closeCart} variant="secondary">
+            Concluir
           </Button>
         </S.Section>
       </S.Sidebar>

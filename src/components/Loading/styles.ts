@@ -1,11 +1,14 @@
 import styled from 'styled-components'
 import { colors } from '../../styles'
 
-export const LoadContainer = styled.div`
+import { Props } from './'
+
+export const LoadContainer = styled.div<Props>`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: calc(100vh - 298px);
-  background-color: ${colors.lightBeige};
+  height: ${(props) => (props.size ? props.size : 'calc(100vh - 298px)')};
+  background-color:  ${(props) =>
+    props.size ? colors.beige : colors.lightBeige};
   }
 `

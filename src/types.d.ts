@@ -19,6 +19,7 @@ declare type Restaurante = {
 }
 
 declare type Endereco = {
+  erro?: boolean
   bairro: string
   cep: string
   complemento: string
@@ -45,7 +46,7 @@ declare type Pagamento = {
       description: string
       city: string
       zipCode: string
-      number: 12
+      number: number
       complement: string
     }
   }
@@ -53,10 +54,10 @@ declare type Pagamento = {
     card: {
       name: string
       number: string
-      code: 123
+      code: number
       expires: {
-        month: 12
-        year: 1234
+        month: number
+        year: number
       }
     }
   }

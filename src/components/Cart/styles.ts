@@ -99,6 +99,15 @@ export const Section = styled.div`
     font-weight: bold;
     font-size: 16px;
   }
+
+  .margin {
+    margin-top: 24px;
+  }
+  .empty-span {
+    text-align: center;
+    margin-bottom: 16px;
+    display: block;
+  }
 `
 
 export const Form = styled.form`
