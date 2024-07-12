@@ -4,8 +4,8 @@ import { ButtonContainer } from '../Tag&Button/styles'
 
 export const CardContainer = styled.div`
   padding: 8px;
-  background-color: ${colors.vermelho};
-  color: ${colors.bege};
+  background-color: ${colors.red};
+  color: ${colors.beige};
 
   > img {
     width: 100%;
@@ -23,8 +23,8 @@ export const CardContainer = styled.div`
   }
 
   ${ButtonContainer} {
-    background-color: ${colors.bege};
-    color: ${colors.vermelho};
+    background-color: ${colors.beige};
+    color: ${colors.red};
     display: block;
     margin: 0;
     text-align: center;
@@ -64,12 +64,12 @@ export const Modal = styled.div`
 `
 
 export const ModalContent = styled.div`
-  background-color: ${colors.vermelho};
+  background-color: ${colors.red};
   padding: 32px;
   display: flex;
   gap: 24px;
   z-index: 1;
-  color: ${colors.bege};
+  color: ${colors.beige};
   position: relative;
 
   .containerCard {
@@ -104,8 +104,8 @@ export const ModalContent = styled.div`
   }
 
   ${ButtonContainer} {
-    background-color: ${colors.bege};
-    color: ${colors.vermelho};
+    background-color: ${colors.beige};
+    color: ${colors.red};
     display: block;
     margin: 0;
     text-align: center;

@@ -29,7 +29,7 @@ export const Overlay = styled.div`
 `
 
 export const Sidebar = styled.aside`
-  background-color: ${colors.vermelho};
+  background-color: ${colors.red};
   padding: 32px 8px 0;
   max-width: 360px;
   width: 100%;
@@ -45,14 +45,14 @@ export const Sidebar = styled.aside`
 export const Prices = styled.div`
   display: flex;
   justify-content: space-between;
-  color: ${colors.bege};
+  color: ${colors.beige};
   font-weight: bold;
   margin-top: 40px;
 `
 
 export const CartItem = styled.div`
-  background-color: ${colors.bege};
-  color: ${colors.vermelho};
+  background-color: ${colors.beige};
+  color: ${colors.red};
   display: flex;
   position: relative;
   margin-bottom: 16px;

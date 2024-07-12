@@ -3,7 +3,7 @@ import { breakpoints, colors } from '../../styles'
 
 export const HeaderContainer = styled.header`
   padding: 64px;
-  color: ${colors.vermelho};
+  color: ${colors.red};
   background-size: cover;
   background-repeat: no-repeat;
   font-size: 14px;

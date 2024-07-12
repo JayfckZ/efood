@@ -1,10 +1,13 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { add, open } from '../../store/reducers/cart'
-import { CardContainer, Modal, ModalContent } from './styles'
+
 import Button from '../Tag&Button/Button'
-import { Prato } from '../../models/restaurante'
 import close from '../../assets/images/close.png'
+
+import { add, open } from '../../store/reducers/cart'
+import { formataPreco } from '../../utils'
+
+import * as S from './styles'
 
 type Props = {
   prato: Prato
@@ -25,27 +28,20 @@ const CardPerfil = ({ prato }: Props) => {
     return descricao
   }
 
-  const formataPreco = (preco: number) => {
-    return new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL'
-    }).format(preco)
-  }
-
   const openCart = () => {
     dispatch(open())
   }
 
   return (
     <>
-      <CardContainer>
+      <S.CardContainer>
         <img src={prato.foto} />
         <h3>{prato.nome}</h3>
         <p>{getDescription(prato.descricao)}</p>
         <Button onClick={() => setEstaVisivel(true)}>Mais informações</Button>
-      </CardContainer>
-      <Modal className={estaVisivel ? 'visible' : ''}>
-        <ModalContent className="container">
+      </S.CardContainer>
+      <S.Modal className={estaVisivel ? 'visible' : ''}>
+        <S.ModalContent className="container">
           <img src={prato.foto} className="foto-prato" />
           <img
             src={close}
@@ -79,9 +75,9 @@ const CardPerfil = ({ prato }: Props) => {
               {'Adicionar ao carrinho - ' + formataPreco(prato.preco)}
             </Button>
           </div>
-        </ModalContent>
+        </S.ModalContent>
         <div className="overlay" onClick={() => setEstaVisivel(false)}></div>
-      </Modal>
+      </S.Modal>
     </>
   )
 }

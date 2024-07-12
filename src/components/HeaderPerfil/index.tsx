@@ -1,10 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+
+import { RootReducer } from '../../store'
 import { open } from '../../store/reducers/cart'
+
+import { HeaderContainer } from './styles'
 import fundo from '../../assets/images/fundo.png'
 import logo from '../../assets/images/logo.png'
-import { HeaderContainer } from './styles'
-import { RootReducer } from '../../store'
 
 const HeaderPerfil = () => {
   const dispatch = useDispatch()

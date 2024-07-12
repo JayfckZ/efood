@@ -1,5 +1,4 @@
 import CardHome from '../../components/CardHome'
-import { Restaurante } from '../../models/restaurante'
 import { ListContainer } from './styles'
 
 type Props = {

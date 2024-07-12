@@ -25,11 +25,11 @@ export const BannerContainer = styled.section`
 `
 export const Categoria = styled.h2`
   font-weight: 100;
-  color: ${colors.branco};
+  color: ${colors.white};
   margin-bottom: 152px;
 `
 
 export const Restaurante = styled.h3`
   font-weight: 900;
-  color: ${colors.branco};
+  color: ${colors.white};
 `

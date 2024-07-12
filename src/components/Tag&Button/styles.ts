@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom'
 import { Props } from './Button'
 
 export const TagContainer = styled.div`
-  background-color: ${colors.vermelho};
-  color: ${colors.bege};
+  background-color: ${colors.red};
+  color: ${colors.beige};
   font-size: 12px;
   font-weight: bold;
   padding: 6px 4px;
@@ -14,9 +14,8 @@ export const TagContainer = styled.div`
 
 export const ButtonContainer = styled(Link)<Props>`
   background-color: ${(props) =>
-    props.variant == 'primary' ? colors.vermelho : colors.bege};
-  color: ${(props) =>
-    props.variant == 'primary' ? colors.bege : colors.vermelho};
+    props.variant == 'primary' ? colors.red : colors.beige};
+  color: ${(props) => (props.variant == 'primary' ? colors.beige : colors.red)};
   font-size: 14px;
   font-weight: bold;
   padding: 6px 4px;

@@ -18,5 +18,5 @@ export const Titulo = styled.h2`
   font-size: 36px;
   font-weight: bold;
   text-align: center;
-  color: ${colors.vermelho};
+  color: ${colors.red};
 `

@@ -1,8 +1,11 @@
+import { MoonLoader } from 'react-spinners'
+
+import { colors } from '../../styles'
 import { LoadContainer } from './styles'
 
 export const Loading = () => (
   <LoadContainer className="container">
-    <span className="loader"></span>
+    <MoonLoader color={colors.red} />
   </LoadContainer>
 )
 

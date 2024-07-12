@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { colors } from '../../styles'
 
 export const FooterContainer = styled.footer`
-  background-color: ${colors.bege};
+  background-color: ${colors.beige};
   padding: 40px 0;
   display: flex;
   flex-direction: column;
@@ -22,7 +22,7 @@ export const Redes = styled.ul`
 export const Paragrafo = styled.p`
   font-size: 10px;
   margin-top: 80px;
-  color: ${colors.vermelho};
+  color: ${colors.red};
   text-align: center;
   max-width: 480px;
 `

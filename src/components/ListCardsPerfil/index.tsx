@@ -1,4 +1,3 @@
-import { Prato } from '../../models/restaurante'
 import CardPerfil from '../CardPerfil'
 import { ListContainer } from './styles'
 
