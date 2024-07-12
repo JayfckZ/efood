@@ -22,6 +22,7 @@ const Card = () => {
   const { data: dataCep } = useGetAdressQuery(cep, {
     skip: !cep
   })
+
   const [
     compra,
     {
@@ -30,6 +31,7 @@ const Card = () => {
       isSuccess: compraSucedida
     }
   ] = useGetCompraMutation()
+
   const [estaNaEntrega, setEstaNaEntrega] = useState(false)
   const [estaNoPagamento, setEstaNoPagamento] = useState(false)
 
