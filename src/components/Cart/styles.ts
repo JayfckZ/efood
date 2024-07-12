@@ -87,3 +87,63 @@ export const CartItem = styled.div`
     cursor: pointer;
   }
 `
+export const Section = styled.div`
+  display: none;
+  color: ${colors.beige};
+
+  &.is-visible {
+    display: block;
+  }
+
+  h3 {
+    font-weight: bold;
+    font-size: 16px;
+  }
+`
+
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 16px 0 24px;
+
+  .between {
+    display: flex;
+    gap: 30px;
+    justify-content: flex-end;
+  }
+
+  #cvv {
+    width: 87px;
+    flex: 0;
+  }
+
+  #numeroCartao {
+    width: 100%;
+  }
+`
+
+export const FormItem = styled.div`
+  flex: 1;
+  label {
+    display: block;
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+
+  input {
+    padding: 8px;
+    background-color: ${colors.beige};
+    border: 1px solid transparent;
+    width: 100%;
+
+    &.error {
+      border: 1px solid red;
+    }
+  }
+
+  small {
+    width: 100%;
+  }
+`

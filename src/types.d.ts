@@ -31,3 +31,33 @@ declare type Endereco = {
   uf: string
   unidade: string
 }
+
+declare type Produto = {
+  id: number
+  price: number
+}
+
+declare type Pagamento = {
+  products: Produto[]
+  delivery: {
+    receiver: string
+    address: {
+      description: string
+      city: string
+      zipCode: string
+      number: 12
+      complement: string
+    }
+  }
+  payment: {
+    card: {
+      name: string
+      number: string
+      code: 123
+      expires: {
+        month: 12
+        year: 1234
+      }
+    }
+  }
+}
